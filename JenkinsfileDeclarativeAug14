@@ -10,7 +10,7 @@ triggers{
 }
 
 options{
-timestampss()
+timestamps()
 }
 stages{
 
