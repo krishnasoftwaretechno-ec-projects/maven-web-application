@@ -1,0 +1,66 @@
+pipeline{
+
+agent any;
+tools{
+maven 'Maven3.6.3'
+}
+
+triggers{
+  pollSCM('* * * * *')
+}
+stages{
+
+stage('CheckoutCode'){
+steps{
+
+git branch: 'development', credentialsId: 'ef60e2b1-ca4f-40df-8e22-f708df55fd1d', url: 'https://github.com/krishnasoftwaretechno-ec-projects/maven-web-application.git'
+}
+}
+
+stage('Build'){
+steps{
+sh "mvn clean package"
+}
+}
+/*
+stage('ExecuteSonarQubeReport'){
+steps{
+sh "mvn sonar:sonar"
+}
+}
+
+stage('UploadArtifactsIntoNexus'){
+steps{
+sh "mvn deploy"
+}
+}
+
+stage('DeployAppIntoTomcat'){
+steps{
+sshagent(['1bb63c52-d48e-4048-bda8-8e3cb18e0bab']) {
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.108.66.184:/opt/apache-tomcat-9.0.50/webapps" 
+}
+}
+}
+}//stages closing
+
+post{
+  
+   success{
+	 emailext body: '''Build is over - Declarative way..
+
+	 Regards,
+	 Krishna software,
+	 9986501506''', subject: 'Build is successfull - Declarative way..', to: 'krishnadynaidu@gmail.com,vijaydevops9396@gmail.com'
+}
+   
+   failure{
+   emailext body: '''Build is  failed - Declarative way..
+
+   Regards,
+   Krishna software,
+   9986501506''', subject: 'Build is over - Declarative way..', to: 'krishnadynaidu@gmail.com'
+}
+   }
+   */
+}//pipeline closing
