@@ -8,6 +8,10 @@ maven 'Maven3.6.3'
 triggers{
   pollSCM('* * * * *')
 }
+
+options{
+timestampss()
+}
 stages{
 
 stage('CheckoutCode'){
