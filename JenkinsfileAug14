@@ -1,0 +1,41 @@
+node('master')
+or
+node{
+
+def mavenHome = tool name: "Maven3.6.3"
+
+stage('CheckoutCode'){
+
+git branch: 'development', credentialsId: 'ef60e2b1-ca4f-40df-8e22-f708df55fd1d', url: 'https://github.com/krishnasoftwaretechno-ec-projects/maven-web-application.git'
+
+}
+
+stage('Build'){
+
+sh "$(mavenHome)/bin/mvn clean package"
+}
+/*
+stage('ExecuteSonarQubeReport'){
+sh "${mavenHome}/bin/mvn sonar:sonar"
+}
+
+stage('UploadArtifactIntoNexus'){
+sh "${mavenHome}/bin/mvn deploy"
+}
+
+stage('DeployAppIntoTomcatServer'){
+sshagent(['1bb63c52-d48e-4048-bda8-8e3cb18e0bab']) {
+sh "scp target//maven-web-application.war ec2-user@3.108.66.184:/opt/apache-tomcat-9.0.50/webapps"
+
+}
+}
+stage('SendEmailNotfication'){
+
+emailext body: '''Build Over!!
+
+Regards,
+Krishna Software
+9986501506''', subject: 'Build Over!!', to: 'krishnadynaidu@gmail.com,vijaydevops9396@gmail.com'
+}
+*/
+}
