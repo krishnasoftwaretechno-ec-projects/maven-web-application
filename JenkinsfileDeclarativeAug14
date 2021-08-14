@@ -42,6 +42,7 @@ sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.
 }
 }
 }
+*/
 }//stages closing
 
 post{
@@ -62,5 +63,5 @@ post{
    9986501506''', subject: 'Build is over - Declarative way..', to: 'krishnadynaidu@gmail.com'
 }
    }
-   */
+   
 }//pipeline closing
